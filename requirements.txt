@@ -8,4 +8,5 @@ psycopg2-binary
 python-dotenv
 langchain-groq
 langchain-core
+Flask-Migrate
 gunicorn
