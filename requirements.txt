@@ -3,3 +3,7 @@ Flask-JWT-Extended
 Flask-Mail
 SQLAlchemy
 Werkzeug
+psycopg2-binary
+python-dotenv
+langchain-groq
+langchain-core
