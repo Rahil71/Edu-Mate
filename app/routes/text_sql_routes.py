@@ -23,7 +23,7 @@ def text_to_sql_route():
         return jsonify({"error": "Query not provided"}), 400
 
     sql_query = generate_sql_from_text(user_query)
-    print("Generated SQL:", sql_query)
+    # print("Generated SQL:", sql_query)
 
     if sql_query.startswith("I'm sorry"):
         return jsonify({"sql": None, "result": sql_query})
