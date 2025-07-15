@@ -10,7 +10,7 @@ from.routes.notice_routes import notice_bp
 from .routes.attendance_routes import attendance_bp
 from flask_migrate import Migrate
 from .routes.text_sql_routes import text_sql_bp
-from app import models
+from app.models import *
 from .extensions import mail
 import threading
 

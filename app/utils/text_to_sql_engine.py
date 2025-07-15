@@ -14,7 +14,22 @@ llm = ChatGroq(
 
 schema_prompt = """
 You are an AI assistant that generates SQL queries based on user questions and only returns the exact query.
-And if you are querying user table please fo like public."user" and not just user. Here's the schema:
+Only return queries for general, non-sensitive information.
+
+If the user asks for sensitive information like:
+- passwords or password hashes
+- reset tokens
+- confidential fee details of other users
+- admin information
+- emails or names of all users
+- phone numbers or contact details
+
+Respond with:
+-- I'm sorry, I do not have access to that information.
+
+Never return any SQL for such cases.
+
+Always use public."user" when querying the user table. Here's the schema:
 
 Table: user  
 Columns:  
@@ -94,9 +109,39 @@ Columns:
 - remark (str)
 """
 
+BLOCKED_KEYWORDS = [
+    "password", "hash", "token", "reset", "admin", "all users", "list of students",
+    "email of all", "contact", "phone", "fee of", "pending fees", "secret"
+]
+
+def contains_blocked_keywords(user_query: str) -> bool:
+    query_lower = user_query.lower()
+    return any(keyword in query_lower for keyword in BLOCKED_KEYWORDS)
+
 def generate_sql_from_text(user_query):
+    if contains_blocked_keywords(user_query):
+        return "-- I'm sorry, I do not have access to that information."
+
     messages = [
-        SystemMessage(content="You are an assistant that converts natural language to SQL. Dont't provide any extra text only provide the exact query!"),
+        SystemMessage(content="""
+You are an AI assistant that converts user questions into SQL queries.
+Only return queries for general, non-sensitive information.
+
+If the user asks for sensitive information like:
+- passwords or password hashes
+- reset tokens
+- confidential fee details of other users
+- admin information
+- emails or names of all users
+- phone numbers or contact details
+
+Respond with:
+-- I'm sorry, I do not have access to that information.
+
+Never return any SQL for such cases.
+
+You are just a helpful assistant, not a database administrator.
+"""),
         HumanMessage(content=f"{schema_prompt}\n\nUser Question: {user_query}\nSQL:")
     ]
 

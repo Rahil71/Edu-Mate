@@ -1,13 +1,18 @@
 import psycopg2
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def execute_sql_query(sql_query):
     try:
         conn = psycopg2.connect(
-            dbname="university",
-            user="postgres",
-            password="RahilShaikh",
-            host="localhost",
-            port="5432"
+            dbname=os.getenv('SUPABASE_DB_NAME'),
+            user=os.getenv('supabase_user'),
+            password=os.getenv('password_supabase'),
+            host=os.getenv('supabase_host'),
+            port=os.getenv('SUPABASE_DB_PORT'),
+            sslmode='require'
         )
         cur = conn.cursor()
         cur.execute(sql_query)
