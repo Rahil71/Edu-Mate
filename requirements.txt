@@ -1,6 +1,7 @@
 Flask
 Flask-JWT-Extended
 Flask-Mail
+Flask-SQLAlchemy
 SQLAlchemy
 Werkzeug
 psycopg2-binary
