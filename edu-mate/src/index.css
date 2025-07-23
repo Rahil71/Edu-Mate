@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Sora", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a; /* Using a solid dark background for simplicity, gradient will be on the component */
+  color: #ffffff; /* White text for dark background */
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
