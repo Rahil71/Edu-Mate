@@ -10,7 +10,7 @@ export function AdminDashboard() {
   const [batches, setBatches] = useState<Batch[]>([])
   const [marks, setMarks] = useState<Mark[]>([])
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [fees, setFees] = useState<Fee[]>([]) 
+  const [fees] = useState<Fee[]>([])
   const [notices, setNotices] = useState<Notice[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [message, setMessage] = useState<string | null>(null)
