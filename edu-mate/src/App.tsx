@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 import { useEffect, useState } from "react"
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
