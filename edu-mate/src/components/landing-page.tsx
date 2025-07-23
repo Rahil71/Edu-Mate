@@ -1,19 +1,27 @@
 import { Link } from "react-router-dom";
-import { ChefHat, Star, ArrowRight } from "lucide-react";
-import heroEducationImg from "./../assets/hero-education.png";
+import { Star, ArrowRight } from "lucide-react";
+import heroEducationImg from "./../assets/hero-bg.png";
+import Logo from "./../assets/horizontal_logo.png";
+import avatar1 from "./../assets/avatars/avatar1.jpg";
+import avatar2 from "./../assets/avatars/avatar2.jpg";
+import avatar3 from "./../assets/avatars/avatar3.jpg";
+import avatar4 from "./../assets/avatars/avatar4.jpg";
+
 
 export function LandingPage() {
+
+  const avatars = [avatar1, avatar2, avatar3, avatar4];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background-gradient-start to-background-gradient-end text-primary-text px-6 py-12 relative overflow-hidden font-sans">
       
       {/* Header */}
       <header className="absolute top-0 left-0 right-0 w-full max-w-7xl mx-auto px-6 py-5 flex items-center justify-between z-10 backdrop-blur-sm bg-black/20 rounded-b-xl shadow-md">
-        <div className="flex items-center gap-3">
-          <ChefHat className="h-8 w-8 text-accent-orange animate-bounce" />
-          <span className="text-2xl font-extrabold tracking-tight text-white">
-            EduMate <span className="text-sm font-medium text-muted">by RS</span>
-          </span>
-        </div>
+        <img
+          src={Logo}
+          alt="EduMate Logo"
+          className="h-11 w-auto"
+        />
         <Link
           to="/login"
           className="px-5 py-2 rounded-full bg-white text-button-text-dark shadow hover:bg-gray-100 transition font-semibold"
@@ -28,15 +36,15 @@ export function LandingPage() {
         {/* Left: Textual Content */}
         <div className="text-center lg:text-left space-y-8">
           {/* Social Proof */}
-          <div className="flex items-center justify-center lg:justify-start gap-3 animate-fade-in">
+            <div className="flex items-center justify-center lg:justify-start gap-3 animate-fade-in">
             <div className="flex -space-x-2">
-              {[...Array(4)].map((_, i) => (
-                <div
+              {avatars.map((avatar, i) => (
+                <img
                   key={i}
-                  className="h-8 w-8 rounded-full ring-2 ring-white bg-green-500 text-white flex items-center justify-center text-xs font-bold"
-                >
-                  {i + 1}
-                </div>
+                  src={avatar}
+                  alt={`User ${i + 1}`}
+                  className="h-8 w-8 rounded-full ring-2 ring-white object-cover bg-gray-200"
+                />
               ))}
             </div>
             <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" />
@@ -72,11 +80,11 @@ export function LandingPage() {
         </div>
 
         {/* Right: Hero Image */}
-        <div className="w-full h-full flex justify-center items-center animate-fade-in-up">
+        <div className="w-full h-full mb-4 flex justify-center items-center animate-fade-in-up">
           <img
             src={heroEducationImg}
             alt="Digital classroom illustration"
-            className="w-full max-w-md rounded-xl shadow-lg"
+            className="w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl rounded-xl shadow-lg"
           />
         </div>
       </main>
